@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ToursAndTravels</title>
+    <title>Tours And Travels</title>
     <%= csrf_meta_tags %>
   </head>
-
   <body>
     <%= yield %>
+    <br><br>
+    <td><%= link_to 'list of itinenaries', itinenaries_url %></td>
+    <td><%= link_to 'list of tours', tours_url %></td>
+    <td><%= link_to 'list of reviews', reviews_url %></td>
+
   </body>
+
 </html>

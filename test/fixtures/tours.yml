@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  price: 1.5
+  deadline: 2019-02-09
+  startDate: 2019-02-09
+  endDate: 2019-02-09
+  totalSeats: 9.99
+  availableSeats: 9.99
+  contactInfo: MyString
+
+two:
+  name: MyString
+  description: MyString
+  price: 1.5
+  deadline: 2019-02-09
+  startDate: 2019-02-09
+  endDate: 2019-02-09
+  totalSeats: 9.99
+  availableSeats: 9.99
+  contactInfo: MyString

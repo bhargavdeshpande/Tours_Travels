@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Itinenaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Country</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @itinenaries.each do |itinenary| %>
+      <tr>
+        <td><%= itinenary.state %></td>
+        <td><%= itinenary.country %></td>
+        <td><%= link_to 'Show', itinenary %></td>
+        <td><%= link_to 'Edit', edit_itinenary_path(itinenary) %></td>
+        <td><%= link_to 'Destroy', itinenary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Itinenary', new_itinenary_path %>

@@ -1,0 +1,24 @@
+<%= form_with(model: review, local: true) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :tourReview %>
+    <%= form.text_field :tourReview, id: :review_tourReview %>
+  </div>
+  <%=form.label :tour_name %>
+  <%= select("review", "tour_id", Tour.all.collect{ |c| [ c.name, c.id] }) %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

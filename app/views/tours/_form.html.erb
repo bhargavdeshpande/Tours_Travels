@@ -1,0 +1,62 @@
+<%= form_with(model: tour, local: true) do |form| %>
+  <% if tour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
+
+      <ul>
+      <% tour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :tour_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :tour_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :tour_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline, id: :tour_deadline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :startDate %>
+    <%= form.date_select :startDate, id: :tour_startDate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :endDate %>
+    <%= form.date_select :endDate, id: :tour_endDate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalSeats %>
+    <%= form.text_field :totalSeats, id: :tour_totalSeats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :availableSeats %>
+    <%= form.text_field :availableSeats, id: :tour_availableSeats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contactInfo %>
+    <%= form.text_field :contactInfo, id: :tour_contactInfo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

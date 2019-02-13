@@ -1,0 +1,32 @@
+<%= form_with(model: itinenary, local: true) do |form| %>
+  <% if itinenary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(itinenary.errors.count, "error") %> prohibited this itinenary from being saved:</h2>
+
+      <ul>
+      <% itinenary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :itinenary_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country, id: :itinenary_country %>
+  </div>
+
+
+    <%=form.label :tour_name %>
+    <%= select("itinenary", "tour_id", Tour.all.collect{ |c| [ c.name, c.id] }) %>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

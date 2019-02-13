@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>State:</strong>
+  <%= @itinenary.state %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @itinenary.country %>
+</p>
+
+<%= link_to 'Edit', edit_itinenary_path(@itinenary) %> |
+<%= link_to 'Back', itinenaries_path %>
