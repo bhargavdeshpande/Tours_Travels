@@ -17,7 +17,7 @@ class LoginsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create login" do
     assert_difference('Login.count') do
-      post logins_url, params: { login: { password: @login.password, username: @login.username } }
+      post logins_url, params: { login: { email: @login.email, name: @login.name, password: @login.password, role: @login.role } }
     end
 
     assert_redirected_to login_url(Login.last)
@@ -34,7 +34,7 @@ class LoginsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update login" do
-    patch login_url(@login), params: { login: { password: @login.password, username: @login.username } }
+    patch login_url(@login), params: { login: { email: @login.email, name: @login.name, password: @login.password, role: @login.role } }
     assert_redirected_to login_url(@login)
   end
 

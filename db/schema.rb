@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190210004351) do
+ActiveRecord::Schema.define(version: 20190215000311) do
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "login_id"
+    t.integer "tour_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["login_id"], name: "index_bookmarks_on_login_id"
+    t.index ["tour_id"], name: "index_bookmarks_on_tour_id"
+  end
 
   create_table "itinenaries", force: :cascade do |t|
     t.string "state"
@@ -18,12 +27,16 @@ ActiveRecord::Schema.define(version: 20190210004351) do
     t.integer "tour_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "login_id"
+    t.index ["login_id"], name: "index_itinenaries_on_login_id"
     t.index ["tour_id"], name: "index_itinenaries_on_tour_id"
   end
 
   create_table "logins", force: :cascade do |t|
-    t.string "username"
+    t.string "name"
+    t.string "email"
     t.string "password"
+    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +46,8 @@ ActiveRecord::Schema.define(version: 20190210004351) do
     t.integer "tour_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "login_id"
+    t.index ["login_id"], name: "index_reviews_on_login_id"
     t.index ["tour_id"], name: "index_reviews_on_tour_id"
   end
 
@@ -46,8 +61,10 @@ ActiveRecord::Schema.define(version: 20190210004351) do
     t.integer "totalSeats"
     t.integer "availableSeats"
     t.string "contactInfo"
+    t.integer "login_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["login_id"], name: "index_tours_on_login_id"
   end
 
 end

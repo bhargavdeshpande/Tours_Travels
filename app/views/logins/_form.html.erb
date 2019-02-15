@@ -12,13 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username, id: :login_username %>
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :login_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :login_email %>
   </div>
 
   <div class="field">
     <%= form.label :password %>
     <%= form.text_field :password, id: :login_password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.number_field :role, id: :login_role %>
   </div>
 
   <div class="actions">

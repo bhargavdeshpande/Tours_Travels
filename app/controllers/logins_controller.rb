@@ -54,7 +54,6 @@ class LoginsController < ApplicationController
   # DELETE /logins/1
   # DELETE /logins/1.json
   def destroy
-
     @login.destroy
     respond_to do |format|
       format.html { redirect_to logins_url, notice: 'Login was successfully destroyed.' }
@@ -70,7 +69,6 @@ class LoginsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def login_params
-      params.require(:login).permit(:username, :password)
+      params.require(:login).permit(:name, :email, :password, :role)
     end
-
 end

@@ -69,6 +69,6 @@ class ItinenariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinenary_params
-      params.require(:itinenary).permit(:state, :country, :tour_id )
+      params.require(:itinenary).permit(:state, :country, :tour_id, :login_id)
     end
 end

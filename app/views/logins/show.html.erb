@@ -1,13 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
-  <%= @login.username %>
+  <strong>Name:</strong>
+  <%= @login.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @login.email %>
 </p>
 
 <p>
   <strong>Password:</strong>
   <%= @login.password %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @login.role %>
 </p>
 
 <%= link_to 'Edit', edit_login_path(@login) %> |
