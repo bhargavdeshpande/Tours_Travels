@@ -6,9 +6,9 @@ class SessionController < ApplicationController
     login = Login.find_by(name: params[:name])
     if login and login.authenticate(params[:password])
       sessions[:user_id] = login.id
-      redirect_to login_url, alert "Logged in successfully"
+      redirect_to logins_url, alert "Logged in successfully"
     else
-      redirect_to logi_url, alert "Unsuccessful login!"
+      redirect_to logins_url, alert "Unsuccessful login!"
     end
   end
 
