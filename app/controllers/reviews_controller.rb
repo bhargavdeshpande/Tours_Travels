@@ -1,16 +1,13 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  @@access = { 1 => { :index => true, :show => false, :new => 0, :edit => 0, :create => 0, :update => 0, :destroy => 0},
-      2 => {:index => false, :show => 0, :new => 0, :edit => 0, :create => 0, :update => 0, :destroy => 0},
-      3 =>{:index => true, :show => 0, :new => 0, :edit => 0, :create => 0, :update => 0, :destroy => 0}}
+  @@access = { 1 => { :new => true, :edit => true, :destroy => true},
+      2 => {:new => false, :edit => false, :destroy => false},
+      3 =>{:new => true, :edit => true, :destroy => true}}
   # GET /reviews
   # GET /reviews.json
   def index
-    if @@access[session[:role]][:index]
+
     @reviews = Review.all
-    else
-      redirect_to tours_url
-    end
 
   end
 
@@ -21,11 +18,23 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+    if @@access[session[:role]][:new]
+      @review = Review.new
+    else
+      respond_to do |format|
+        format.html { redirect_to reviews_url, notice: 'Agent cannot write reviews.' }
+      end
+    end
   end
 
   # GET /reviews/1/edit
   def edit
+    if @@access[session[:role]][:edit]== false or session[:user_id] != params[:review][:user_id]
+
+       respond_to do |format|
+        format.html { redirect_to reviews_url, notice: 'Only the creator can edit their reviews' }
+      end
+    end
   end
 
   # POST /reviews
@@ -61,10 +70,17 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
-    @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
+    if @@access[session[:role]][:edit]== false or session[:user_id] != params[:review][:user_id]
+
+      respond_to do |format|
+        format.html { redirect_to reviews_url, notice: 'Only the creator can delete their reviews' }
+      end
+    else
+      @review.destroy
+      respond_to do |format|
+        format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
