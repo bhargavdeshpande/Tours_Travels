@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
-  get 'session/new'
+  resources :users
+  #get 'session/new'
 
   get 'session/create'
 
   get 'session/destroy'
 
+
+
   resources :bookmarks
-  resources :logins
   resources :itinenaries
   resources :reviews
   resources :tours
-  root 'logins#new'
+
+ get 'tour' => 'tour#index'
+ controller :session do
+  get 'login' => :new
+  post 'login' => :create
+  delete 'logout' => :destroy
+ end
+
+ root 'tour#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
