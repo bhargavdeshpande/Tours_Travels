@@ -1,10 +1,11 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
-  #@@access = {:1 => {:index => 1, :show}, :2 => {},  :3 =>{}}
+
   # GET /bookmarks
   # GET /bookmarks.json
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.find_by_sql(["SELECT * FROM bookmark WHERE user_id = ?", session[:user_id]])
+    #@bookmarks = Bookmark.all
   end
 
   # GET /bookmarks/1

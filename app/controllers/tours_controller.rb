@@ -1,6 +1,8 @@
 class ToursController < ApplicationController
   before_action :set_tour, only: [:show, :edit, :update, :destroy]
-
+  @@access = { 1 => { :new => false, :edit => false, :destroy => false},
+               2 => {:new => true, :edit => true, :destroy => true},
+               3 =>{:new => true, :edit => true, :destroy => true}}
   # GET /tours
   # GET /tours.json
   def index
@@ -15,11 +17,25 @@ class ToursController < ApplicationController
 
   # GET /tours/new
   def new
-    @tour = Tour.new
+    if @@access[session[:role]][:new]
+      @tour = Tour.new
+    else
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Customers cannot create tours.' }
+      end
+    end
+
   end
 
   # GET /tours/1/edit
   def edit
+
+      if @@access[session[:role]][:edit]== false or session[:user_id] != params[:tour][:user_id]
+
+        respond_to do |format|
+          format.html { redirect_to tours_url, notice: 'Only the creator can edit their tours.' }
+        end
+      end
   end
 
   # POST /tours
@@ -28,7 +44,7 @@ class ToursController < ApplicationController
     @tour = Tour.new(tour_params.merge(:user_id => session[:user_id]))
     respond_to do |format|
       if @tour.save
-        format.html { redirect_to @tour, notice: 'Tour was successfully created.' }
+        format.html { redirect_to new_itinenary_url, notice: 'Tour was successfully created.' }
         format.json { render :show, status: :created, location: @tour }
       else
         format.html { render :new }
@@ -54,11 +70,21 @@ class ToursController < ApplicationController
   # DELETE /tours/1
   # DELETE /tours/1.json
   def destroy
-    @tour.destroy
-    respond_to do |format|
-      format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
-      format.json { head :no_content }
+    tour_creator = Tour.find_by(id: params[:id])
+    #tour_creator = Tour.find_by_sql(["SELECT * FROM tours WHERE id = ?", params[:id]])
+    if @@access[session[:role]][:destroy]== false or tour_creator.user_id != session[:user_id]
+
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Only the creator can delete their tour.' }
+      end
+    else
+      @tour.destroy
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
+
   end
 
   private
@@ -69,6 +95,6 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo)
+      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :user_id)
     end
 end

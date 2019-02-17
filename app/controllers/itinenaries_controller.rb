@@ -1,6 +1,8 @@
 class ItinenariesController < ApplicationController
   before_action :set_itinenary, only: [:show, :edit, :update, :destroy]
-
+  @@access = { 1 => { :new => false, :edit => false, :destroy => false},
+               2 => {:new => true, :edit => true, :destroy => true},
+               3 =>{:new => true, :edit => true, :destroy => true}}
   # GET /itinenaries
   # GET /itinenaries.json
   def index
@@ -14,11 +16,28 @@ class ItinenariesController < ApplicationController
 
   # GET /itinenaries/new
   def new
-    @itinenary = Itinenary.new
+
+    tour_creator = Tour.find_by_sql(["SELECT user_id FROM tours WHERE tour_id = ?", params[:itinenary][:tour_id]])
+    if @@access[session[:role]][:new] and tour_creator == session[:user_id]
+      @itinenary = Itinenary.new
+    else
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Only the creator can add an itinenary to their tour.' }
+      end
+    end
+
   end
 
   # GET /itinenaries/1/edit
   def edit
+    tour_creator = Tour.find_by_sql(["SELECT user_id FROM tour WHERE tour_id = ?", params[:itinenary][:user_id]])
+    if @@access[session[:role]][:edit] == false and tour_creator != session[:user_id]
+
+
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Only the creator can edit an itinenary to their tour.' }
+      end
+    end
   end
 
   # POST /itinenaries
@@ -54,11 +73,18 @@ class ItinenariesController < ApplicationController
   # DELETE /itinenaries/1
   # DELETE /itinenaries/1.json
   def destroy
-    @itinenary.destroy
-    respond_to do |format|
-      format.html { redirect_to itinenaries_url, notice: 'Itinenary was successfully destroyed.' }
-      format.json { head :no_content }
+    if session[:user_id] == params[:itinenary][:user_id] or session[:role] == 1
+      @itinenary.destroy
+      respond_to do |format|
+        format.html { redirect_to itinenaries_url, notice: 'Itinenary was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to itinenaries_url, notice: 'Not authorised to delete the itinenary.' }
+      end
     end
+
   end
 
   private
@@ -70,5 +96,6 @@ class ItinenariesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinenary_params
       params.require(:itinenary).permit(:state, :country, :tour_id, :user_id)
+
     end
 end

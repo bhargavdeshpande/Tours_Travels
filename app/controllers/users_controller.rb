@@ -1,10 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:new, :create, :index]
+  skip_before_action :authorize, only: [:new, :create]
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if [session[:role] != 3
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Only admins can see all users.' }
+      end
+    else
+      @users = User.all
+    end
+
   end
 
   # GET /users/1
