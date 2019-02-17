@@ -1,6 +1,7 @@
 class Tour < ApplicationRecord
   has_many :reviews
   has_many :itinenaries
+  has_many :bookings
   belongs_to :user
   has_many :bookmarks
   validates :name, :presence => true, uniqueness: {case_sensitive: false}

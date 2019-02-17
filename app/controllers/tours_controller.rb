@@ -10,6 +10,7 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
+    session[:tour_id] = params[:id]
   end
 
   # GET /tours/new
@@ -25,7 +26,6 @@ class ToursController < ApplicationController
   # POST /tours.json
   def create
     @tour = Tour.new(tour_params.merge(:user_id => session[:user_id]))
-
     respond_to do |format|
       if @tour.save
         format.html { redirect_to @tour, notice: 'Tour was successfully created.' }

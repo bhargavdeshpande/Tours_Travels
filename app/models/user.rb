@@ -4,5 +4,5 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :bookmarks
   has_many :itinenaries
-
+  has_many :bookings
 end
