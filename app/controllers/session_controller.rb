@@ -7,6 +7,7 @@ class SessionController < ApplicationController
     user = User.find_by(name: params[:name])
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
+      session[:role] = user.role
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Logged in successfully.' }
        end

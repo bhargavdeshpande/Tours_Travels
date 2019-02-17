@@ -1,8 +1,12 @@
+<div>
+  <% if flash[:notice] %>
+    <p id = "notice"> <%= flash[:notice] %></p>
+  <%end %>
+</div>
+
 <h1>Session#new</h1>
 <div>
-  <% if flash[:alert] %>
-    <p id = "notice"> <%= flash[:alert] %></p>
-    <%end %>
+
   <%=form_tag do %>
     <fieldset>
       <legend>Please log in</legend>
@@ -15,6 +19,10 @@
       </div>
       <div>
         <%= submit_tag "Login" %>
+      </div>
+      <br>
+      <div>
+        <td><%= link_to 'signup', new_user_path %></td>
       </div>
     </fieldset>
     <% end %>

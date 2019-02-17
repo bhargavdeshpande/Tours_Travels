@@ -4,7 +4,7 @@ class CreateReviews < ActiveRecord::Migration[5.1]
       t.string :tourReview
       t.references :tour
       t.timestamps
-      t.references :login
+      t.references :user
     end
   end
 end

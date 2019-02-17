@@ -5,7 +5,7 @@ class CreateItinenaries < ActiveRecord::Migration[5.1]
       t.string :country
       t.references :tour
       t.timestamps
-      t.references :login
+      t.references :user
     end
   end
 end

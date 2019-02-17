@@ -24,7 +24,7 @@ class ToursController < ApplicationController
   # POST /tours
   # POST /tours.json
   def create
-    @tour = Tour.new(tour_params)
+    @tour = Tour.new(tour_params.merge(:user_id => session[:user_id]))
 
     respond_to do |format|
       if @tour.save
@@ -69,6 +69,6 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :login_id)
+      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo)
     end
 end

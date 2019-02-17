@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
-
+  #@@access = {:1 => {:index => 1, :show}, :2 => {},  :3 =>{}}
   # GET /bookmarks
   # GET /bookmarks.json
   def index
@@ -24,7 +24,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.json
   def create
-    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark = Bookmark.new(bookmark_params.merge(:user_id => session[:user_id]))
 
     respond_to do |format|
       if @bookmark.save
@@ -70,6 +70,6 @@ class BookmarksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
       #params.fetch(:bookmark, {})
-      params.require(:bookmark).permit(:tour_id, :login_id)
+      params.require(:bookmark).permit(:tour_id, :user_id)
     end
 end

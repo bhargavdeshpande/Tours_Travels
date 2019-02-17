@@ -1,10 +1,17 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-
+  @@access = { 1 => { :index => true, :show => false, :new => 0, :edit => 0, :create => 0, :update => 0, :destroy => 0},
+      2 => {:index => false, :show => 0, :new => 0, :edit => 0, :create => 0, :update => 0, :destroy => 0},
+      3 =>{:index => true, :show => 0, :new => 0, :edit => 0, :create => 0, :update => 0, :destroy => 0}}
   # GET /reviews
   # GET /reviews.json
   def index
+    if @@access[session[:role]][:index]
     @reviews = Review.all
+    else
+      redirect_to tours_url
+    end
+
   end
 
   # GET /reviews/1
@@ -24,7 +31,7 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params)
+    @review = Review.new(review_params.merge(:user_id => session[:user_id]))
 
     respond_to do |format|
       if @review.save
@@ -69,6 +76,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:tourReview, :tour_id, :login_id)
+      params.require(:review).permit(:tourReview, :tour_id, :user_id)
     end
 end

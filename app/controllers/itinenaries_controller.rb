@@ -24,7 +24,7 @@ class ItinenariesController < ApplicationController
   # POST /itinenaries
   # POST /itinenaries.json
   def create
-    @itinenary = Itinenary.new(itinenary_params)
+    @itinenary = Itinenary.new(itinenary_params.merge(:user_id => session[:user_id]))
 
     respond_to do |format|
       if @itinenary.save
@@ -69,6 +69,6 @@ class ItinenariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinenary_params
-      params.require(:itinenary).permit(:state, :country, :tour_id, :login_id)
+      params.require(:itinenary).permit(:state, :country, :tour_id, :user_id)
     end
 end
