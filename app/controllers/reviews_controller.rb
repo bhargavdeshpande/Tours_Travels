@@ -70,7 +70,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
-    if @@access[session[:role]][:edit]== false or session[:user_id] != params[:review][:user_id]
+    if @@access[session[:role]][:destroy]== false or session[:user_id] != params[:review][:user_id]
 
       respond_to do |format|
         format.html { redirect_to reviews_url, notice: 'Only the creator can delete their reviews' }
