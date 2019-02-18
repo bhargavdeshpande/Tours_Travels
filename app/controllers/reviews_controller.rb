@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/1/edit
   def edit
     review_creator=Review.find_by(id: params[:id])
-    if session[:user_id] != review_creator.user_id
+    if session[:username] != review_creator.username
 
        respond_to do |format|
         format.html { redirect_to reviews_url, notice: 'Only the creator can edit their reviews' }
@@ -41,7 +41,7 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params.merge(:user_id => session[:user_id]))
+    @review = Review.new(review_params.merge(:username => session[:username]))
 
     respond_to do |format|
       if @review.save
@@ -72,7 +72,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1.json
   def destroy
     review_creator=Review.find_by(id: params[:id])
-    if session[:role] == 3 or session[:user_id] == review_creator.user_id
+    if session[:role] == 3 or session[:username] == review_creator.username
       @review.destroy
       respond_to do |format|
         format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
@@ -95,6 +95,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:tourReview, :tour_id, :user_id)
+      params.require(:review).permit(:tourReview, :tourname, :username)
     end
 end

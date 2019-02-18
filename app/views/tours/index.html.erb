@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Tour name</th>
       <th>Description</th>
       <th>Price</th>
       <th>Deadline</th>
@@ -21,7 +21,7 @@
   <tbody>
     <% @tours.each do |tour| %>
       <tr>
-        <td><%= tour.name %></td>
+        <td><%= tour.tourname %></td>
         <td><%= tour.description %></td>
         <td><%= tour.price %></td>
         <td><%= tour.deadline %></td>

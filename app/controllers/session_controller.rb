@@ -4,9 +4,10 @@ class SessionController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:name])
+    user = User.find_by(username: params[:username])
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
+      session[:username]= user.username
       session[:role] = user.role
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Logged in successfully.' }

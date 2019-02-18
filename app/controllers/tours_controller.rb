@@ -12,7 +12,7 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
-    session[:tour_id] = params[:id]
+    session[:tourname] = params[:tourname]
   end
 
   # GET /tours/new
@@ -30,7 +30,7 @@ class ToursController < ApplicationController
   # GET /tours/1/edit
   def edit
       tour_creator = Tour.find_by(id: params[:id])
-      if @@access[session[:role]][:edit]== false or session[:user_id] != tour_creator.user_id
+      if @@access[session[:role]][:edit]== false or session[:username] != tour_creator.username
 
         respond_to do |format|
           format.html { redirect_to tours_url, notice: 'Only the creator can edit their tours.' }
@@ -41,7 +41,7 @@ class ToursController < ApplicationController
   # POST /tours
   # POST /tours.json
   def create
-    @tour = Tour.new(tour_params.merge(:user_id => session[:user_id]))
+    @tour = Tour.new(tour_params.merge(:username => session[:username]))
     respond_to do |format|
       if @tour.save
         format.html { redirect_to new_itinenary_url, notice: 'Tour was successfully created.' }
@@ -72,7 +72,7 @@ class ToursController < ApplicationController
   def destroy
     tour_creator = Tour.find_by(id: params[:id])
     #tour_creator = Tour.find_by_sql(["SELECT * FROM tours WHERE id = ?", params[:id]])
-    if @@access[session[:role]][:destroy]== false or tour_creator.user_id != session[:user_id]
+    if @@access[session[:role]][:destroy]== false or tour_creator.username != session[:username]
 
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Only the creator can delete their tour.' }
@@ -95,6 +95,6 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :user_id)
+      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :username)
     end
 end

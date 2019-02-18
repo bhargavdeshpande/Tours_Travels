@@ -1,7 +1,7 @@
 class CreateTours < ActiveRecord::Migration[5.1]
   def change
     create_table :tours do |t|
-      t.string :name
+      t.string :tourname
       t.string :description
       t.float :price
       t.date :deadline
