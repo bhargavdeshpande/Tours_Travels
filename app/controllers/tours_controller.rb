@@ -29,8 +29,8 @@ class ToursController < ApplicationController
 
   # GET /tours/1/edit
   def edit
-
-      if @@access[session[:role]][:edit]== false or session[:user_id] != params[:tour][:user_id]
+      tour_creator = Tour.find_by(id: params[:id])
+      if @@access[session[:role]][:edit]== false or session[:user_id] != tour_creator.user_id
 
         respond_to do |format|
           format.html { redirect_to tours_url, notice: 'Only the creator can edit their tours.' }

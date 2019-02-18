@@ -4,8 +4,23 @@ class BookmarksController < ApplicationController
   # GET /bookmarks
   # GET /bookmarks.json
   def index
-    @bookmarks = Bookmark.find_by_sql(["SELECT * FROM bookmark WHERE user_id = ?", session[:user_id]])
-    #@bookmarks = Bookmark.all
+      	tour_creator = Tour.find_by(id: session[:tour_id])
+	#Agent who created the tour
+	if session[:role]==2 and session[:user_id] == tour_creator.user_id
+		@bookmarks=Bookmark.where(tour_id: session[:tour_id])
+	#Customer
+	elsif session[:role]==1
+		@bookmarks=Bookmark.where(user_id: session[:user_id])
+	#Admin
+	elsif session[:role]==3
+		@bookmarks=Bookmark.all
+	#Other agents
+	else
+		respond_to do |format|
+        		format.html { redirect_to tours_url, notice: 'Agents can view bookmarks only of tours cretaed by them' }
+        		format.json { render :show, status: :created, location: @bookmarks }
+		end
+	end		
   end
 
   # GET /bookmarks/1

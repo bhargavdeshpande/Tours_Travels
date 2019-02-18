@@ -16,9 +16,9 @@ class ItinenariesController < ApplicationController
 
   # GET /itinenaries/new
   def new
-
-    tour_creator = Tour.find_by_sql(["SELECT user_id FROM tours WHERE tour_id = ?", params[:itinenary][:tour_id]])
-    if @@access[session[:role]][:new] and tour_creator == session[:user_id]
+    tour_creator = Tour.find_by(id: session[:tour_id])
+    #tour_creator = Tour.find_by_sql(["SELECT user_id FROM tours WHERE tour_id = ?", params[:itinenary][:tour_id]])
+    if @@access[session[:role]][:new] and tour_creator.user_id == session[:user_id]
       @itinenary = Itinenary.new
     else
       respond_to do |format|
@@ -30,8 +30,9 @@ class ItinenariesController < ApplicationController
 
   # GET /itinenaries/1/edit
   def edit
-    tour_creator = Tour.find_by_sql(["SELECT user_id FROM tour WHERE tour_id = ?", params[:itinenary][:user_id]])
-    if @@access[session[:role]][:edit] == false and tour_creator != session[:user_id]
+    tour_creator = Tour.find_by(id: session[:tour_id])
+    #tour_creator = Tour.find_by_sql(["SELECT user_id FROM tour WHERE tour_id = ?", params[:itinenary][:user_id]])
+    if @@access[session[:role]][:edit] == false and tour_creator.user_id != session[:user_id]
 
 
       respond_to do |format|
@@ -73,7 +74,8 @@ class ItinenariesController < ApplicationController
   # DELETE /itinenaries/1
   # DELETE /itinenaries/1.json
   def destroy
-    if session[:user_id] == params[:itinenary][:user_id] or session[:role] == 1
+    tour_creator = Tour.find_by(id: session[:tour_id])
+    if session[:user_id] == tour_creator.user_id or session[:role] == 1
       @itinenary.destroy
       respond_to do |format|
         format.html { redirect_to itinenaries_url, notice: 'Itinenary was successfully destroyed.' }
