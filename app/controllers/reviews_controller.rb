@@ -29,7 +29,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
-    if @@access[session[:role]][:edit]== false or session[:user_id] != params[:review][:user_id]
+    review_creator=Review.find_by(id: params[:id])
+    if session[:user_id] != review_creator.user_id
 
        respond_to do |format|
         format.html { redirect_to reviews_url, notice: 'Only the creator can edit their reviews' }
@@ -70,16 +71,18 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
-    if @@access[session[:role]][:destroy]== false or session[:user_id] != params[:review][:user_id]
-
-      respond_to do |format|
-        format.html { redirect_to reviews_url, notice: 'Only the creator can delete their reviews' }
-      end
-    else
+    review_creator=Review.find_by(id: params[:id])
+    if session[:role] == 3 or session[:user_id] == review_creator.user_id
       @review.destroy
       respond_to do |format|
         format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
         format.json { head :no_content }
+      end
+
+    else
+
+      respond_to do |format|
+        format.html { redirect_to reviews_url, notice: 'Only the creator can delete their reviews' }
       end
     end
   end
