@@ -18,7 +18,6 @@ class BookmarksController < ApplicationController
 	else
 		respond_to do |format|
         		format.html { redirect_to tours_url, notice: 'Agents can view bookmarks only of tours cretaed by them' }
-        		format.json { render :show, status: :created, location: @bookmarks }
 		end
 	end		
   end
@@ -30,7 +29,14 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/new
   def new
-    @bookmark = Bookmark.new
+	if session[:role]==1
+		@bookmark = Bookmark.new
+	else
+		respond_to do |format|
+		        format.html { redirect_to tours_url, notice: 'Only customers can bookmark' }
+		end
+	end
+
   end
 
   # GET /bookmarks/1/edit
@@ -40,7 +46,8 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.json
   def create
-    @bookmark = Bookmark.new(bookmark_params.merge(:user_id => session[:user_id]))
+	#@bookmark = Bookmark.new(bookmark_params.merge(:user_id => session[:user_id]))
+	@bookmark = Bookmark.new(bookmark_params.merge(:user_id => session[:user_id], :tour_id => session[:tour_id]))
 
     respond_to do |format|
       if @bookmark.save
@@ -70,11 +77,16 @@ class BookmarksController < ApplicationController
   # DELETE /bookmarks/1
   # DELETE /bookmarks/1.json
   def destroy
-    @bookmark.destroy
-    respond_to do |format|
-      format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+	if sessions[:user_id]==params[:user_id]
+    		@bookmark.destroy
+    		respond_to do |format|
+      			format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }
+      			format.json { head :no_content }
+    		end
+	else
+		respond_to do |format|
+                        format.html { redirect_to bookmarks_url, notice: 'Only customers can delete bookmarks' }
+
   end
 
   private
