@@ -1,9 +1,9 @@
 class Tour < ApplicationRecord
-  has_many :reviews, foreign_key: "tourname"
-  has_many :itinenaries, foreign_key: "tourname"
-  has_many :bookings, foreign_key: "tourname"
+  has_many :reviews
+  has_many :itinenaries
+  has_many :bookings
   belongs_to :user
-  has_many :bookmarks, foreign_key: "tourname"
+  has_many :bookmarks
   validates :tourname, :presence => true, uniqueness: {case_sensitive: false}
   validates :description, :presence => true
   validates :price, :presence => true, numericality: true;

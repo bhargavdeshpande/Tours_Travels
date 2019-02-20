@@ -46,7 +46,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.json
   def create
-	@bookmark = Bookmark.new(bookmark_params.merge(:username => session[:username], :tourname => session[:tourname]))
+	@bookmark = Bookmark.new(bookmark_params.merge(:username => session[:username], :tourname => session[:tourname], :tour_id => session[:tour_id], :user_id => session[:user_id]))
 
     respond_to do |format|
       if @bookmark.save
@@ -99,6 +99,6 @@ class BookmarksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
       #params.fetch(:bookmark, {})
-      params.permit(:username, :tourname)
+      params.permit(:username, :tourname, :user_id, :tour_id)
     end
 end

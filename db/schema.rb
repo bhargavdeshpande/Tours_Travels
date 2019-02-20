@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.integer "tour_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "tourname"
     t.index ["tour_id"], name: "index_bookings_on_tour_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -28,6 +30,8 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.integer "tour_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "tourname"
     t.index ["tour_id"], name: "index_bookmarks_on_tour_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
@@ -39,6 +43,8 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "username"
+    t.string "tourname"
     t.index ["tour_id"], name: "index_itinenaries_on_tour_id"
     t.index ["user_id"], name: "index_itinenaries_on_user_id"
   end
@@ -49,12 +55,14 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "username"
+    t.string "tourname"
     t.index ["tour_id"], name: "index_reviews_on_tour_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "tours", force: :cascade do |t|
-    t.string "name"
+    t.string "tourname"
     t.string "description"
     t.float "price"
     t.date "deadline"
@@ -63,6 +71,7 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.integer "totalSeats"
     t.integer "availableSeats"
     t.string "contactInfo"
+    t.string "username"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,7 +79,7 @@ ActiveRecord::Schema.define(version: 20190217203443) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
     t.string "email"
     t.string "password_digest"
     t.integer "role"

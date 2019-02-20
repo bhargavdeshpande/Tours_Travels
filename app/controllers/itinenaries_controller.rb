@@ -17,6 +17,7 @@ class ItinenariesController < ApplicationController
   # GET /itinenaries/new
   def new
     tour_creator = Tour.find_by(tourname: session[:tourname])
+    #tour_creator=Tour.find_by_tourname(session[:tourname])
     #tour_creator = Tour.find_by_sql(["SELECT user_id FROM tours WHERE tour_id = ?", params[:itinenary][:tour_id]])
     if @@access[session[:role]][:new] and tour_creator.username == session[:username]
       @itinenary = Itinenary.new
@@ -44,7 +45,7 @@ class ItinenariesController < ApplicationController
   # POST /itinenaries
   # POST /itinenaries.json
   def create
-    @itinenary = Itinenary.new(itinenary_params.merge(:user_id => session[:user_id]))
+    @itinenary = Itinenary.new(itinenary_params.merge(:user_id => session[:user_id], :tourname => session[:tourname], :username => session[:username]))
 
     respond_to do |format|
       if @itinenary.save
@@ -97,7 +98,7 @@ class ItinenariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itinenary_params
-      params.require(:itinenary).permit(:state, :country, :tourname, :username)
+      params.require(:itinenary).permit(:state, :country, :tourname, :username, :user_id, :tour_id)
 
     end
 end

@@ -41,7 +41,7 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params.merge(:username => session[:username]))
+    @review = Review.new(review_params.merge(:username => session[:username], :user_id => session[:user_id], :tourname => session[:tourname], :tour_id => session[:tour_id]))
 
     respond_to do |format|
       if @review.save
@@ -95,6 +95,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:tourReview, :tourname, :username)
+      params.require(:review).permit(:tourReview, :tourname, :username, :tour_id, :user_id)
     end
 end

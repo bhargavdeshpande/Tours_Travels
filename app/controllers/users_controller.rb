@@ -4,14 +4,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if [session[:role] != 3
+    if session[:role] != 3
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Only admins can see all users.' }
       end
     else
       @users = User.all
     end
-
   end
 
   # GET /users/1
@@ -78,7 +77,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :role)
 
     end
 end

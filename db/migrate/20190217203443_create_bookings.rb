@@ -1,3 +1,4 @@
+
 class CreateBookings < ActiveRecord::Migration[5.1]
   def change
     create_table :bookings do |t|
@@ -6,6 +7,8 @@ class CreateBookings < ActiveRecord::Migration[5.1]
       t.references :user
       t.references :tour
       t.timestamps
+      t.string :username
+      t.string :tourname
     end
   end
 end

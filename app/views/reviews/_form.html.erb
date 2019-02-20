@@ -14,9 +14,9 @@
   <div class="field">
     <%= form.label :tourReview %>
     <%= form.text_field :tourReview, id: :review_tourReview %>
+
   </div>
-  <%=form.label :tour_name %>
-  <%= select("review", "tour_id", Tour.all.collect{ |c| [ c.name, c.id] }) %>
+
 
   <div class="actions">
     <%= form.submit %>

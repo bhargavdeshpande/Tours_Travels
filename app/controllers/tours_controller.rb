@@ -12,7 +12,8 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
-    session[:tourname] = params[:tourname]
+    session[:tour_id] = params[:id]
+    session[:tourname] = @tour.tourname
   end
 
   # GET /tours/new
@@ -41,9 +42,14 @@ class ToursController < ApplicationController
   # POST /tours
   # POST /tours.json
   def create
-    @tour = Tour.new(tour_params.merge(:username => session[:username]))
+    @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id]))
+
     respond_to do |format|
       if @tour.save
+        #@tour_temp = Tour.find(params[:id])
+        session[:tourname]=@tour.tourname
+        session[:tour_id]=@tour.id
+
         format.html { redirect_to new_itinenary_url, notice: 'Tour was successfully created.' }
         format.json { render :show, status: :created, location: @tour }
       else
@@ -95,6 +101,6 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:name, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :username)
+      params.require(:tour).permit(:tourname, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :username, :user_id)
     end
 end
