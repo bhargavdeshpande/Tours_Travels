@@ -11,14 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status, id: :booking_status %>
-  </div>
+
 
   <div class="field">
     <%= form.label :seatsToBook %>
     <%= form.number_field :seatsToBook, id: :booking_seatsToBook %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mode_of_booking %>
+    <%= form.text_field :mode_of_booking, id: :mode_of_booking%>
   </div>
 
   <div class="actions">

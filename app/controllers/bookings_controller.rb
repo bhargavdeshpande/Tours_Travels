@@ -24,15 +24,17 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params.merge(:username => session[:username], :tourname => session[:tourname], :user_id => session[:user_id], :tour_id => session[:tour_id]))
-
+    mode=booking_params[:mode_of_booking].to_i
+    @booking = Booking.new(booking_params.except(:mode_of_booking).merge(:username => session[:username], :tourname => session[:tourname], :user_id => session[:user_id], :tour_id => session[:tour_id], :status=>"booked7676"))
+    if session[:role]==1
     respond_to do |format|
-      if @booking.save
+      if @booking.bookmytour(mode,session)
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
-        format.html { render :new }
+        format.html { render :new, notice:"Only customer can book a tour" }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
+      end
       end
     end
   end
@@ -69,6 +71,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:status, :seatsToBook, :username, :tourname, :user_id, :tour_id)
+      params.require(:booking).permit(:status, :seatsToBook, :username, :tourname, :user_id, :tour_id, :mode_of_booking)
     end
 end
