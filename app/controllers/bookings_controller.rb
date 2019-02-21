@@ -24,20 +24,33 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    mode=booking_params[:mode_of_booking].to_i
-    @booking = Booking.new(booking_params.except(:mode_of_booking).merge(:username => session[:username], :tourname => session[:tourname], :user_id => session[:user_id], :tour_id => session[:tour_id], :status=>"booked7676"))
+    option=booking_params[:mode_of_booking].to_i
+    @booking = Booking.new(booking_params.except(:mode_of_booking).merge(:username => session[:username], :tourname => session[:tourname], :user_id => session[:user_id], :tour_id => session[:tour_id]))
     if session[:role]==1
     respond_to do |format|
-      if @booking.bookmytour(mode,session)
+      mode,booked,waitlisted = @booking.bookmytour(option,session)
+      if mode == 0
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
+      elsif mode == 1
+        format.html { redirect_to @booking, notice: "You have booked #{booked} seats" }
+        format.json { render :show, status: :created, location: @booking }
+      elsif mode == 2
+        format.html { redirect_to @booking, notice: "You have booked #{booked} seats and are waitlisted for #{waitlisted} seats" }
+        format.json { render :show, status: :created, location: @booking }
+      elsif mode == 3
+        format.html { redirect_to @booking, notice: "You have been waitlisted for #{waitlisted} seats" }
+        format.json { render :show, status: :created, location: @booking }
       else
-        format.html { render :new, notice:"Only customer can book a tour" }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+        format.html { redirect_to new_booking_url, notice: 'Required number of seats unavailable' }
+        format.json { render :show, status: :created, location: @booking }
       end
     end
-  end
+    else
+      format.html { render :new, notice:"Only customer can book a tour" }
+      format.json { render json: @booking.errors, status: :unprocessable_entity }
+    end
+    end
 
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
@@ -56,6 +69,7 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
+    @booking.cancelBooking(session)
     @booking.destroy
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }

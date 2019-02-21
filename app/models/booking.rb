@@ -2,28 +2,48 @@ class Booking < ApplicationRecord
   belongs_to :tour
   belongs_to :user
   def bookmytour (mode,new_session)
-=begin
-    if mode_of_booking ==1
-      self.se
-=end
     tour=Tour.find_by(tourname: new_session[:tourname])
     availableSeats=tour.availableSeats
     if availableSeats>=self.seatsToBook
       self.save
+      self.update_attribute(:status, "confirmed")
       tour.update_attribute(:availableSeats,availableSeats-seatsToBook)
-
+      return 0,self.seatsToBook,0
     else
       if mode == 1
-        #change seats to book to available seats
+        self.seatsToBook = availableSeats
         self.save
         tour.update_attribute(:availableSeats,0)
+        self.update_attribute(:status, "confirmed")
+        return 1,availableSeats,0
       elsif mode == 2
-      #book available seats with status booked, and remaining to waitlist. could be 2 entries in the database
+        waitlistedSeats = self.seatsToBook - availableSeats
+        self.seatsToBook = availableSeats
+        self.save
+        tour.update_attribute(:availableSeats,0)
+        self.update_attribute(:status, "confirmed")
+        ####for waitlist######
+        waitlist = self.dup
+        waitlist.save
+        waitlist.update_attribute(:status, "waitlist")
+        waitlist.update_attribute(:seatsToBook, waitlistedSeats)
+        return 2,availableSeats,waitlistedSeats
       elsif mode ==3
-       #add all to waitlist
+        self.save
+        self.update_attribute(:status, "waitlist")
+        return 3,0,self.seatsToBook
       elsif mode == 4
-        return false
+        return 4,0,0
       end
+    end
+  end
+
+  def cancelBooking(new_session)
+    if self.status =='confirmed'
+      tour=Tour.find_by(tourname: new_session[:tourname])
+      tour.update_attribute(:availableSeats, self.seatsToBook + tour.availableSeats)
+      ######need to refactor this to add
+      # waitlisted customer to book as per guidelines
     end
   end
 end

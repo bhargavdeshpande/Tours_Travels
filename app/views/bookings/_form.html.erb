@@ -20,7 +20,13 @@
 
   <div class="field">
     <%= form.label :mode_of_booking %>
-    <%= form.text_field :mode_of_booking, id: :mode_of_booking%>
+    <%= form.select :mode_of_booking, options_for_select(
+        {"Only book available seats"=>1,
+         "Book available seats and waitlist the rest"=>2,
+         "If all seats are not available, waitlist all"=>3,
+         "If all seats are not available, do not book"=>4
+        })
+    %>
   </div>
 
   <div class="actions">
