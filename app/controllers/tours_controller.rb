@@ -6,7 +6,14 @@ class ToursController < ApplicationController
   # GET /tours
   # GET /tours.json
   def index
-    @tours = Tour.all
+    if session[:search_flag] == "1"
+      #@@tours = Tour.where(tourname: "Pune", description: "beauty")
+      @tours = Tour.filterOutResults(session[:search_tourname], session[:search_state], session[:search_price], session[:search_country])
+      session[:search_flag] = "0"
+    else
+      @tours = Tour.all
+    end
+
   end
 
   # GET /tours/1

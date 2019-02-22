@@ -9,6 +9,7 @@ class SessionController < ApplicationController
       session[:user_id] = user.id
       session[:username]= user.username
       session[:role] = user.role
+      session[:search_flag] = "0"
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Logged in successfully.' }
        end

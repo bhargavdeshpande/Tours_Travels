@@ -1,0 +1,2 @@
+module SearchbylocsHelper
+end
