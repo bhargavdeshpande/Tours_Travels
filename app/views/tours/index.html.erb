@@ -30,8 +30,8 @@
         <td><%= tour.totalSeats %></td>
         <td><%= tour.availableSeats %></td>
         <td><%= tour.contactInfo %></td>
-        <td><%= link_to 'Show', tour %></td>
-        <td><%= link_to 'Edit', edit_tour_path(tour) %></td>
+        <td><%= button_to 'Show', tour, method: :get%></td>
+        <td><%= button_to 'Edit', edit_tour_path(tour), method: :get %></td>
         <td><%= button_to 'Destroy', tour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

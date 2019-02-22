@@ -19,9 +19,9 @@
         <td><%= itinenary.tourname %></td>
         <td><%= itinenary.state %></td>
         <td><%= itinenary.country %></td>
-        <td><%= link_to 'Show', itinenary %></td>
-        <td><%= link_to 'Edit', edit_itinenary_path(itinenary) %></td>
-        <td><%= link_to 'Destroy', itinenary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Show', itinenary, method: :get %></td>
+        <td><%= button_to 'Edit', edit_itinenary_path(itinenary), method: :get %></td>
+        <td><%= button_to 'Destroy', itinenary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

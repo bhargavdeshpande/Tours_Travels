@@ -20,7 +20,9 @@
         <td><%= booking.tourname %></td>
         <td><%= booking.status %></td>
         <td><%= booking.seatsToBook %></td>
-        <td><%= link_to 'Show', booking %></td>
+
+        <td><%= button_to 'Show', booking, method: :get %></td>
+
         <td><%= button_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
