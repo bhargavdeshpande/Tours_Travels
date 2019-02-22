@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
   skip_before_action :authorize
+  layout false
   def new
   end
 
