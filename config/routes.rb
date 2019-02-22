@@ -7,12 +7,11 @@ Rails.application.routes.draw do
 
   get 'session/destroy'
 
-
-
   resources :bookmarks
   resources :itinenaries
   resources :reviews
   resources :tours
+  resources :searches
 
  get 'tour' => 'tour#index'
  controller :session do
@@ -20,6 +19,14 @@ Rails.application.routes.draw do
   post 'login' => :create
   delete 'logout' => :destroy
  end
+  #get 'search/create'
+
+  #get 'search/destroy'
+  #controller :search do
+   # get 'search' => :new
+   # post 'search' => :create
+    #delete 'search' => :destroy
+  #end
 
  root 'session#new'
 

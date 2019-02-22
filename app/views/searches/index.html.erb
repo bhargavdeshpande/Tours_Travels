@@ -1,0 +1,34 @@
+<div>
+  <% if flash[:notice] %>
+    <p id = "notice"> <%= flash[:notice] %></p>
+  <%end %>
+</div>
+
+<h1>New Search</h1>
+<div>
+
+  <%=form_tag do %>
+    <fieldset>
+      <legend>Please log in</legend>
+      <div>
+        <%= label_tag :price, 'Price' %>
+        <%= text_field_tag :price, params[:price] %>
+
+        <%= label_tag :tourname, 'Tourname' %>
+        <%= text_field_tag :tourname, params[:tourname] %>
+
+        <%= label_tag :state, 'State' %>
+        <%= text_field_tag :state, params[:state] %>
+
+        <%= label_tag :country, 'Country' %>
+        <%= text_field_tag :country, params[:country] %>
+
+      </div>
+      <div>
+        <%= submit_tag "Search" %>
+      </div>
+      <br>
+
+    </fieldset>
+  <% end %>
+</div>

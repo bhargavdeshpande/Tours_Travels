@@ -1,0 +1,29 @@
+<%= form_with(model: tour, local: true) do |form| %>
+  <% if tour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tour.errors.count, "error") %> prohibited this search from being saved:</h2>
+
+      <ul>
+      <% tour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.text_field :price, id: :price %>
+    </div>
+
+    <div class="field">
+      <%= form.label :tourname %>
+      <%= form.text_field :tourname, id: :tourname %>
+    </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

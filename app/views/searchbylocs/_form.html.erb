@@ -1,0 +1,17 @@
+<%= form_with(model: searchbyloc, local: true) do |form| %>
+  <% if searchbyloc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(searchbyloc.errors.count, "error") %> prohibited this searchbyloc from being saved:</h2>
+
+      <ul>
+      <% searchbyloc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
