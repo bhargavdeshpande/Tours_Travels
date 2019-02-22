@@ -7,7 +7,7 @@ class ToursController < ApplicationController
   # GET /tours.json
   def index
     if session[:search_flag] == "1"
-      #@@tours = Tour.where(tourname: "Pune", description: "beauty")
+
       @tours = Tour.filterOutResults(session[:search_tourname], session[:search_state], session[:search_price], session[:search_country])
       session[:search_flag] = "0"
     else
@@ -38,8 +38,8 @@ class ToursController < ApplicationController
   # GET /tours/1/edit
   def edit
       tour_creator = Tour.find_by(id: params[:id])
-      if @@access[session[:role]][:edit]== false or session[:username] != tour_creator.username
-
+      if session[:username] == tour_creator.username or session[:role]== 3
+      else
         respond_to do |format|
           format.html { redirect_to tours_url, notice: 'Only the creator can edit their tours.' }
         end
@@ -49,7 +49,8 @@ class ToursController < ApplicationController
   # POST /tours
   # POST /tours.json
   def create
-    @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id]))
+    avail_seats = tour_params[:totalSeats]
+    @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id], :availableSeats => avail_seats))
 
     respond_to do |format|
       if @tour.save
@@ -85,16 +86,15 @@ class ToursController < ApplicationController
   def destroy
     tour_creator = Tour.find_by(id: params[:id])
     #tour_creator = Tour.find_by_sql(["SELECT * FROM tours WHERE id = ?", params[:id]])
-    if @@access[session[:role]][:destroy]== false or tour_creator.username != session[:username]
-
-      respond_to do |format|
-        format.html { redirect_to tours_url, notice: 'Only the creator can delete their tour.' }
-      end
-    else
+    if session[:role] == 3 or tour_creator.username == session[:username]
       @tour.destroy
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
         format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Only the creator can delete their tour.' }
       end
     end
 
@@ -108,6 +108,6 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:tourname, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :availableSeats, :contactInfo, :username, :user_id)
+      params.require(:tour).permit(:tourname, :description, :price, :deadline, :startDate, :endDate, :totalSeats, :contactInfo, :username, :user_id)
     end
 end

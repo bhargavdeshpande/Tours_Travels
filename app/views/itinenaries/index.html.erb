@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Tourname</th>
       <th>State</th>
       <th>Country</th>
       <th colspan="3"></th>
@@ -14,6 +15,8 @@
   <tbody>
     <% @itinenaries.each do |itinenary| %>
       <tr>
+
+        <td><%= itinenary.tourname %></td>
         <td><%= itinenary.state %></td>
         <td><%= itinenary.country %></td>
         <td><%= link_to 'Show', itinenary %></td>

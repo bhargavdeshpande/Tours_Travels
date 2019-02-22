@@ -17,7 +17,7 @@ class BookmarksController < ApplicationController
 	#Other agents
 	else
 		respond_to do |format|
-        		format.html { redirect_to tours_url, notice: 'Agents can view bookmarks only of tours cretaed by them' }
+        		format.html { redirect_to tours_url, notice: 'Agents can view bookmarks only of tours created by them' }
 		end
 	end		
   end

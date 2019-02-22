@@ -33,9 +33,8 @@ class ItinenariesController < ApplicationController
   def edit
     tour_creator = Tour.find_by(tourname: session[:tourname])
     #tour_creator = Tour.find_by_sql(["SELECT user_id FROM tour WHERE tour_id = ?", params[:itinenary][:user_id]])
-    if @@access[session[:role]][:edit] == false and tour_creator.username != session[:username]
-
-
+    if session[:role] == 3 or tour_creator.username == session[:username]
+    else
       respond_to do |format|
         format.html { redirect_to tours_url, notice: 'Only the creator can edit an itinenary to their tour.' }
       end
@@ -45,7 +44,7 @@ class ItinenariesController < ApplicationController
   # POST /itinenaries
   # POST /itinenaries.json
   def create
-    @itinenary = Itinenary.new(itinenary_params.merge(:user_id => session[:user_id], :tourname => session[:tourname], :username => session[:username]))
+    @itinenary = Itinenary.new(itinenary_params.merge(:user_id => session[:user_id], :tourname => session[:tourname], :username => session[:username], :tour_id => session[:tour_id]))
 
     respond_to do |format|
       if @itinenary.save
@@ -76,7 +75,7 @@ class ItinenariesController < ApplicationController
   # DELETE /itinenaries/1.json
   def destroy
     tour_creator = Tour.find_by(tourname: session[:tourname])
-    if session[:username] == tour_creator.username or session[:role] == 1
+    if session[:username] == tour_creator.username or session[:role] == 3
       @itinenary.destroy
       respond_to do |format|
         format.html { redirect_to itinenaries_url, notice: 'Itinenary was successfully destroyed.' }

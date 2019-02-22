@@ -30,9 +30,9 @@ class ReviewsController < ApplicationController
   # GET /reviews/1/edit
   def edit
     review_creator=Review.find_by(id: params[:id])
-    if session[:username] != review_creator.username
-
-       respond_to do |format|
+    if session[:role] == 3 or session[:username] == review_creator.username
+    else
+      respond_to do |format|
         format.html { redirect_to reviews_url, notice: 'Only the creator can edit their reviews' }
       end
     end

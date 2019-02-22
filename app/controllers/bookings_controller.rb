@@ -4,7 +4,23 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+
+    tour_creator = Tour.find_by(tourname: session[:tourname])
+    #Agent who created the tour
+    if session[:role]==2 and session[:username] == tour_creator.username
+      @bookings=Booking.where(tourname: session[:tourname])
+      #Customer
+    elsif session[:role]==1
+      @bookings=Booking.where(username: session[:username])
+      #Admin
+    elsif session[:role]==3
+      @bookings=Booking.all
+      #Other agents
+    else
+      respond_to do |format|
+        format.html { redirect_to tours_url, notice: 'Agents can view bookings only of tours created by them' }
+      end
+    end
   end
 
   # GET /bookings/1
@@ -14,11 +30,23 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+    if session[:role] == 2
+      redirect_to tours_url, notice: 'Agents cannot book tours.'
+    else
+      @booking = Booking.new
+    end
+
   end
 
   # GET /bookings/1/edit
   def edit
+    booking_creator=Booking.find_by(id: params[:id])
+    if session[:role] == 3 or session[:username] == booking_creator.username
+    else
+      respond_to do |format|
+        format.html { redirect_to bookings_url, notice: 'Only the customer can ' }
+      end
+    end
   end
 
   # POST /bookings
@@ -26,7 +54,7 @@ class BookingsController < ApplicationController
   def create
     option=booking_params[:mode_of_booking].to_i
     @booking = Booking.new(booking_params.except(:mode_of_booking).merge(:username => session[:username], :tourname => session[:tourname], :user_id => session[:user_id], :tour_id => session[:tour_id]))
-    if session[:role]==1
+    if session[:role] != 2
     respond_to do |format|
       mode,booked,waitlisted = @booking.bookmytour(option,session)
       if mode == 0
@@ -47,8 +75,9 @@ class BookingsController < ApplicationController
       end
     end
     else
-      format.html { render :new, notice:"Only customer can book a tour" }
-      format.json { render json: @booking.errors, status: :unprocessable_entity }
+
+      redirect_to new_booking_url, notice:"Only customer can book a tour"
+
     end
     end
 
@@ -69,11 +98,21 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
+    booking_creator = Booking.find_by(id: params[:id])
+
+    if session[:role] == 3 or booking_creator.user_id == session[:user_id]
     @booking.cancelBooking(session)
     @booking.destroy
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to bookings_url, notice: 'Booking can only be cancelled by their creators' }
+        format.json { head :no_content }
+      end
+
     end
   end
 
