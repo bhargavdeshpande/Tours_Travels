@@ -50,7 +50,7 @@ class ToursController < ApplicationController
   # POST /tours.json
   def create
     avail_seats = tour_params[:totalSeats]
-    @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id], :availableSeats => avail_seats))
+    @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id], :availableSeats => avail_seats, :waitlistedSeats => 0))
 
     respond_to do |format|
       if @tour.save

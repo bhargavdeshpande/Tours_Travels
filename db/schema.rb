@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.date "endDate"
     t.integer "totalSeats"
     t.integer "availableSeats"
+    t.integer "waitlistedSeats"
     t.string "contactInfo"
     t.string "username"
     t.integer "user_id"
