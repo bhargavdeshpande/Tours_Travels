@@ -4,12 +4,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if session[:role] != 3
-      respond_to do |format|
-        format.html { redirect_to tours_url, notice: 'Only admins can see all users.' }
-      end
-    else
+    if session[:role] == 3
       @users = User.all
+    else
+      @users = User.where(username: session[:username])
     end
   end
 
