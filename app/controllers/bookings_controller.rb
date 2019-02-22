@@ -56,7 +56,7 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1.json
   def update
     respond_to do |format|
-      if @booking.update(booking_params)
+      if @booking.update(booking_params.except(:mode_of_booking))
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else

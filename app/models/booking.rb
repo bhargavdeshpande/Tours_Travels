@@ -18,10 +18,13 @@ class Booking < ApplicationRecord
         return 1,availableSeats,0
       elsif mode == 2
         waitlistedSeats = self.seatsToBook - availableSeats
-        self.seatsToBook = availableSeats
-        self.save
+
+        if availableSeats != 0
+          self.seatsToBook = availableSeats
+          self.save
+          self.update_attribute(:status, "confirmed")
+        end
         tour.update_attribute(:availableSeats,0)
-        self.update_attribute(:status, "confirmed")
         ####for waitlist######
         waitlist = self.dup
         waitlist.save
@@ -42,8 +45,13 @@ class Booking < ApplicationRecord
     if self.status =='confirmed'
       tour=Tour.find_by(tourname: new_session[:tourname])
       tour.update_attribute(:availableSeats, self.seatsToBook + tour.availableSeats)
-      ######need to refactor this to add
-      # waitlisted customer to book as per guidelines
+    end
+
+    loop do
+      bookingToConfirm = Booking.where("status =='waitlist' AND seatsToBook <= ?", self.seatsToBook).first
+      break if bookingToConfirm == nil
+      bookingToConfirm.update_attribute(:status, "confirmed")
+      tour.update_attribute(:availableSeats, tour.availableSeats - bookingToConfirm.seatsToBook)
     end
   end
 end
