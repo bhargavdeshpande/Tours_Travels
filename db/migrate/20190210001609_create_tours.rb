@@ -9,6 +9,7 @@ class CreateTours < ActiveRecord::Migration[5.1]
       t.date :endDate
       t.integer :totalSeats
       t.integer :availableSeats
+      t.integer :waitlistedSeats
       t.string :contactInfo
       t.string :username
       t.references :user

@@ -10,8 +10,8 @@ class Booking < ApplicationRecord
       tour.update_attribute(:availableSeats,availableSeats-seatsToBook)
       return 0,self.seatsToBook,0
     else
-      if availableSeats ==0
-        mode =4
+      if availableSeats == 0 and mode == 1
+        mode = 4
       end
       if mode == 1
         self.seatsToBook = availableSeats
@@ -21,7 +21,8 @@ class Booking < ApplicationRecord
         return 1,availableSeats,0
       elsif mode == 2
         waitlistedSeats = self.seatsToBook - availableSeats
-
+        init_wait_seats = tour.waitlistedSeats
+        tour.update_attribute(:waitlistedSeats, init_wait_seats + waitlistedSeats)
         if availableSeats != 0
           self.seatsToBook = availableSeats
           self.save
@@ -37,6 +38,9 @@ class Booking < ApplicationRecord
       elsif mode ==3
         self.save
         self.update_attribute(:status, "waitlist")
+        waitlistedSeats = self.seatsToBook
+        init_wait_seats = tour.waitlistedSeats
+        tour.update_attribute(:waitlistedSeats, init_wait_seats + waitlistedSeats)
         return 3,0,self.seatsToBook
       elsif mode == 4
         return 4,0,0
@@ -53,7 +57,11 @@ class Booking < ApplicationRecord
         break if bookingToConfirm == nil
         bookingToConfirm.update_attribute(:status, "confirmed")
         tour.update_attribute(:availableSeats, tour.availableSeats - bookingToConfirm.seatsToBook)
+        tour.update_attribute(:waitlistedSeats, tour.waitlistedSeats-bookingToConfirm.seatsToBook)
       end
+    elsif self.status == 'waitlist'
+      tour=Tour.find_by(tourname: new_session[:tourname])
+      tour.update_attribute(:waitlistedSeats, tour.waitlistedSeats - self.seatsToBook)
     end
   end
 end
