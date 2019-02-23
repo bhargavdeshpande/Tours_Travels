@@ -7,6 +7,7 @@ class CreateTours < ActiveRecord::Migration[5.1]
       t.date :deadline
       t.date :startDate
       t.date :endDate
+      t.string :tourStatus
       t.integer :totalSeats
       t.integer :availableSeats
       t.integer :waitlistedSeats

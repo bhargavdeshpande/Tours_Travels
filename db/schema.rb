@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20190217203443) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "tourReview"
+    t.string "subject"
     t.integer "tour_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -68,6 +69,7 @@ ActiveRecord::Schema.define(version: 20190217203443) do
     t.date "deadline"
     t.date "startDate"
     t.date "endDate"
+    t.string "tourStatus"
     t.integer "totalSeats"
     t.integer "availableSeats"
     t.integer "waitlistedSeats"

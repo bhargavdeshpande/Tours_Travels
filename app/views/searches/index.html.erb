@@ -13,15 +13,25 @@
       <div>
         <%= label_tag :price, 'Price' %>
         <%= text_field_tag :price, params[:price] %>
-
+        <br>
         <%= label_tag :tourname, 'Tourname' %>
         <%= text_field_tag :tourname, params[:tourname] %>
-
+        <br>
         <%= label_tag :state, 'State' %>
         <%= text_field_tag :state, params[:state] %>
-
+        <br>
         <%= label_tag :country, 'Country' %>
         <%= text_field_tag :country, params[:country] %>
+        <br>
+        <%= label_tag :sdate, 'Start Date' %>
+        <%= date_field_tag :sdate, params[:sdate] %>
+        <br>
+        <%= label_tag :edate, 'End Date' %>
+        <%= date_field_tag :edate, params[:edate] %>
+        <br>
+        <%= label_tag :availableSeats, 'Available Seats' %>
+        <%= text_field_tag :availableSeats, params[:availableSeats] %>
+
 
       </div>
       <div>

@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Tour name</th>
+      <th>Tour Subject</th>>
       <th>Tour review</th>
 
       <th colspan="3"></th>
@@ -16,6 +17,7 @@
     <% @reviews.each do |review| %>
       <tr>
         <td><%= review.tourname %></td>
+        <td><%= review.subject %></td>
         <td><%= review.tourReview %></td>
         <td><%= button_to 'Show', review, method: :get %></td>
         <td><%= button_to 'Edit', edit_review_path(review), method: :get %></td>
