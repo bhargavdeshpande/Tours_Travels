@@ -8,10 +8,28 @@ class ToursController < ApplicationController
   def index
     if session[:search_flag] == "1"
 
-      @tours = Tour.filterOutResults(session[:search_tourname], session[:search_state], session[:search_price], session[:search_country])
+      @tours = Tour.filterOutResults(session[:search_tourname], session[:search_state], session[:search_price], session[:search_country], session[:search_sdate], session[:search_edate], session[:search_availableSeats])
+      @tours.each do |tour|
+        if tour.endDate < Date.today
+          tour.tourStatus = "Completed"
+          #tour.update_attributes(:tourstatus,  "Completed")
+        elsif tour.startDate < Date.today
+          tour.tourStatus = "In Progress"
+          #tour.update_attributes(:tourstatus,  "In Progress")
+        end
+      end
       session[:search_flag] = "0"
     else
       @tours = Tour.all
+      @tours.each do |tour|
+        if tour.endDate < Date.today
+          tour.tourStatus = "Completed"
+          #tour.update_attributes(:tourstatus,  "Completed")
+        elsif tour.startDate < Date.today
+          tour.tourStatus = "In Progress"
+          #tour.update_attributes(:tourstatus,  "In Progress")
+        end
+      end
     end
 
   end
@@ -49,22 +67,34 @@ class ToursController < ApplicationController
   # POST /tours
   # POST /tours.json
   def create
-    avail_seats = tour_params[:totalSeats]
-    @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id], :availableSeats => avail_seats, :waitlistedSeats => 0))
 
-    respond_to do |format|
-      if @tour.save
-        #@tour_temp = Tour.find(params[:id])
-        session[:tourname]=@tour.tourname
-        session[:tour_id]=@tour.id
+    if tour_params[:endDate] < tour_params[:startDate]
+      redirect_to new_tour_url, notice: 'Tour end date cannot be before start date.'
+    elsif  tour_params[:startDate] < tour_params[:deadline]
+      redirect_to new_tour_url, notice: 'Tour booking deadline has to be before start date.'
+    elsif tour_params[:deadline] < Date.today.to_s
+      redirect_to new_tour_url, notice: 'Tour booking deadline has to be in the future.'
+    else
 
-        format.html { redirect_to new_itinenary_url, notice: 'Tour was successfully created.' }
-        format.json { render :show, status: :created, location: @tour }
-      else
-        format.html { render :new }
-        format.json { render json: @tour.errors, status: :unprocessable_entity }
+      avail_seats = tour_params[:totalSeats]
+
+      @tour = Tour.new(tour_params.merge(:username => session[:username],:user_id => session[:user_id], :availableSeats => avail_seats, :waitlistedSeats => 0, :tourStatus => "In Future"))
+
+      respond_to do |format|
+        if @tour.save
+          #@tour_temp = Tour.find(params[:id])
+          session[:tourname]=@tour.tourname
+          session[:tour_id]=@tour.id
+
+          format.html { redirect_to new_itinenary_url, notice: 'Tour was successfully created.' }
+          format.json { render :show, status: :created, location: @tour }
+        else
+          format.html { render :new }
+          format.json { render json: @tour.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # PATCH/PUT /tours/1

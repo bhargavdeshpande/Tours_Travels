@@ -30,8 +30,11 @@ class SearchesController < ApplicationController
     session[:search_price] = params[:price].to_s
     session[:search_country] = params[:country].to_s
     session[:search_state] = params[:state].to_s
+    session[:search_sdate] = params[:sdate]
+    session[:search_edate] = params[:edate]
+    session[:search_availableSeats] = params[:availableSeats].to_s
     session[:search_flag] = "1"
-    redirect_to tours_url, notice: 'Search was successfully created.'
+    redirect_to tours_url
     #format.html { redirect_to tours_url, notice: 'Search was successful.' }
 
   end

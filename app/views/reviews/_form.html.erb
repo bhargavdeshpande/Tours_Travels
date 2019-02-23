@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+
+    <%= form.label :subject %>
+    <%= form.text_field :subject, id: :review_subject %>
+
     <%= form.label :tourReview %>
     <%= form.text_field :tourReview, id: :review_tourReview %>
 

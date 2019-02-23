@@ -22,6 +22,12 @@
 
         <%= label_tag :country, 'Country' %>
         <%= text_field_tag :country, params[:country] %>
+
+        <%= label_tag :sdate, 'Start Date' %>
+        <%= text_field_tag :sdate, params[:sdate] %>
+
+        <%= label_tag :availableSeats, 'Available Seats' %>
+        <%= text_field_tag :availableSeats, params[:availableSeats] %>
       </div>
       <div>
         <%= submit_tag "Search" %>

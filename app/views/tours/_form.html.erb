@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: tour, local: true) do |form| %>
   <% if tour.errors.any? %>
     <div id="error_explanation">
@@ -28,17 +30,17 @@
 
   <div class="field">
     <%= form.label :deadline %>
-    <%= form.date_select :deadline, id: :tour_deadline %>
+    <%= form.date_field :deadline, id: :tour_deadline %>
   </div>
 
   <div class="field">
     <%= form.label :startDate %>
-    <%= form.date_select :startDate, id: :tour_startDate %>
+    <%= form.date_field :startDate, id: :tour_startDate %>
   </div>
 
   <div class="field">
     <%= form.label :endDate %>
-    <%= form.date_select :endDate, id: :tour_endDate %>
+    <%= form.date_field :endDate, id: :tour_endDate %>
   </div>
 
   <div class="field">
