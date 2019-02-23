@@ -6,7 +6,6 @@ class User < ApplicationRecord
   has_many :itinenaries, dependent: :destroy
   has_many :bookings, dependent: :destroy
   validates :username, :presence => true, uniqueness: {case_sensitive: false}
-  validates :email, :presence => true
+  validates :email, :presence => true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :role, :presence => true
-
 end
