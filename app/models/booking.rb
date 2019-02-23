@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :tour
   belongs_to :user
+  validates :seatsToBook, presence: true, numericality: true
   def bookmytour (mode,new_session)
     tour=Tour.find_by(tourname: new_session[:tourname])
     availableSeats=tour.availableSeats
