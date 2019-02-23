@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38a3a1b5-a138-44ef-9e3c-00b4730d700e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/reviews_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/reviews_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/searches_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/searches_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/session_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/session_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/tours_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/tours_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/tour.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/tour.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/reviews/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reviews/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/reviews/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reviews/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/reviews/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reviews/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/searches/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/searches/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/searches/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/searches/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/tours/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tours/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/tours/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tours/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/tours/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tours/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20190210001609_create_tours.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20190210001609_create_tours.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20190210003543_create_reviews.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20190210003543_create_reviews.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/booking.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/booking.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -34,8 +20,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/ToursAndTravels@Development__ToursAndTravels.rcov" NAME="Development: ToursAndTravels Coverage Results" MODIFIED="1550894352791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ToursAndTravels" />
     <SUITE FILE_PATH="coverage/Tours_Travels@Development__ToursAndTravels.rcov" NAME="Development: ToursAndTravels Coverage Results" MODIFIED="1550418618313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ToursAndTravels" />
-    <SUITE FILE_PATH="coverage/ToursAndTravels@Development__ToursAndTravels.rcov" NAME="Development: ToursAndTravels Coverage Results" MODIFIED="1550436437316" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="ToursAndTravels" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -61,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/tours_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
+            <state relative-caret-position="1258">
               <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
             </state>
           </provider>
@@ -172,61 +158,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="reviews" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="tours" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tours_Travels" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tours_Travels" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-              <item name="migrate" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
       <pane id="RailsProjectView" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,7 +184,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.schema">
+  <component name="RunManager" selected="Rails.Development: ToursAndTravels">
     <configuration name="Development: ToursAndTravels" type="RailsRunConfigurationType" factoryName="Rails">
       <module name="ToursAndTravels" />
       <predefined_log_file enabled="true" id="RUBY_RAILS_SERVER" />
@@ -402,17 +336,17 @@
       <workItem from="1550792899818" duration="13374000" />
       <workItem from="1550847967717" duration="7957000" />
       <workItem from="1550858974160" duration="1604000" />
+      <workItem from="1550894338488" duration="12000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97884000" />
+    <option name="totallyTimeSpent" value="97896000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49790794" visible="true" weight="0.24961832" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49790794" visible="true" weight="0.254251" />
       <window_info id="Structure" order="1" sideWeight="0.50209206" side_tool="true" weight="0.23129772" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -425,7 +359,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3184" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3179396" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -744,7 +678,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/tours_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
+        <state relative-caret-position="1258">
           <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
         </state>
       </provider>
