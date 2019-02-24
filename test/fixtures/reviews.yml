@@ -1,7 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  tourReview: MyString
+  subject: Raleigh is a great place to live.
+  tourname: Raleigh
+  username: Nikita
+  tourReview: It rains and is sunny at the exact same time.
+  user: one
+  tour: one
 
 two:
-  tourReview: MyString
+  subject: Raleigh is an okay place to live.
+  tourname: Raleigh
+  username: Nitin
+  tourReview: Too many weather changes in a day.
+  user: two
+  tour: one

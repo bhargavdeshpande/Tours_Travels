@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  tourname: MyString
   description: MyString
   price: 1.5
   deadline: 2019-02-09
@@ -12,7 +12,7 @@ one:
   contactInfo: MyString
 
 two:
-  name: MyString
+  tourname: MyString
   description: MyString
   price: 1.5
   deadline: 2019-02-09
