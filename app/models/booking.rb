@@ -51,10 +51,10 @@ class Booking < ApplicationRecord
 
   def cancelBooking(new_session)
     if self.status =='confirmed'
-      tour=Tour.find_by(tourname: new_session[:tourname])
+      tour=Tour.find_by(tourname: self.tourname)
       tour.update_attribute(:availableSeats, self.seatsToBook + tour.availableSeats)
       loop do
-        bookingToConfirm = Booking.where("status ='waitlist'").where("\"seatsToBook\" <= ?", self.seatsToBook).first
+        bookingToConfirm = Booking.where("status ='waitlist'").where("tourname = ?", self.tourname).where("\"seatsToBook\" <= ?", self.seatsToBook).first
         # bookingToConfirm = Booking.where("status =='waitlist' AND seatsToBook <= ?", self.seatsToBook).first
         break if bookingToConfirm == nil
         bookingToConfirm.update_attribute(:status, "confirmed")
@@ -62,7 +62,7 @@ class Booking < ApplicationRecord
         tour.update_attribute(:waitlistedSeats, tour.waitlistedSeats-bookingToConfirm.seatsToBook)
       end
     elsif self.status == 'waitlist'
-      tour=Tour.find_by(tourname: new_session[:tourname])
+      tour=Tour.find_by(tourname: self.tourname)
       tour.update_attribute(:waitlistedSeats, tour.waitlistedSeats - self.seatsToBook)
     end
   end

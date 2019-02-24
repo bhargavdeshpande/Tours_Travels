@@ -29,7 +29,7 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/new
   def new
-	if session[:role]==1
+	if session[:role]!=2
 		@bookmark = Bookmark.new
 	else
 		respond_to do |format|
