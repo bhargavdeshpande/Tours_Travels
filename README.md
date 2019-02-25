@@ -60,5 +60,21 @@ Anyone can sign up as a customer using their email, name and password. After sig
 * Edit or delete a review they previously submitted.<br>
 * Customer should be able to delete his own account.<br>
 ______________________________________________________________________________________________________ <br>
+### Additional information related to Navigation <br>
+Click **Show** link of a respective tour to : <br>
+* Book that tour <br>
+* Bookmark that tour <br>
+* To see bookings for that tour(Bookings for agent tours or customer self bookings based on login role type) <br>
+* To See bookmarks for that tour(Bookmarks for agent tours or customer self bookmarks based on login role type) <br>
+* Write a review for that tour<br>
+* Add Itinerary for that tour<br>
+
+Click **Search** link on tour page to search tour based on <br>
+* Tour name <br>
+* Date Range <br>
+* Price <br>
+* Itinerary <br>
+* Available Seats <br>
+______________________________________________________________________________________________________________________________________
 
 
