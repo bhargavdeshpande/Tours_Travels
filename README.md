@@ -3,7 +3,7 @@
 Heroku App Link: https://infinite-forest-63165.herokuapp.com/
 <br>
 This project is a tour management system application built in Ruby on Rails. 
-_________________________________________________________________________________________________________________________<br>
+_______________________________________________________________________<br>
 
 ### Login And Logout<br>
 
@@ -39,7 +39,7 @@ Tasks performed by admin: <br>
 * View the list of all tours, along with detailed information: Log in as the Admin and the home page id the list of tours and all their information.<br>
 * View list of users who have booked a tour: Click on the show button for a particular tour, and click on You Bookings to see all the customers who have booked seats for the tour.<br> 
 * View all fields of reviews: Log in as Admin, and click on the List of Reviews link.<br>
-_____________________________________________________________________________________________________<br>
+_______________________________________________________________________<br>
 
 ### Customer <br>
 
@@ -51,7 +51,7 @@ ________________________________________________________________________________
 * cancel partial number of reserved seats: This functionality is not implemented. The person can however, edit their booking to make the changes in the number of seats. <br>
 * Cancel the entire booking: Log in as the Customer, click on show for a tour that you are interested in. Click on My Bookings and you can click on delete for whichever booking you wish to delete. <br>
 * Convert waitlist to a booking when a booking is cancelled: Create two customer profiles and create a booking with one and a waitlist with another. Cancel the booking and the waitlist will cet converted to a confirmed booking. <br>
-______________________________________________________________________________________________________ <br>
+_______________________________________________________________________<br>
 
 ### Agent <br>
 
@@ -64,7 +64,7 @@ ________________________________________________________________________________
 * View list of users who have booked a tour: Click on the show button for a particular tour, and click on Your Bookings to see all the customers who have booked seats for the tour.<br>
 * View all fields of reviews: Log in as an Agent, and click on the List of Reviews link.<br>
 * View list of users who have bookmarked a tour: Click on the show button for a particular tour, and click on Your Bookmarks to see all the customers who have booked seats for the tour.<br>
-______________________________________________________________________________________________________ <br>
+_______________________________________________________________________<br>
 
 ### Tours <br>
 
@@ -86,7 +86,7 @@ ________________________________________________________________________________
 * Cancel the entire booking: Log in as the Customer, click on show for a tour that you are interested in. Click on My Bookings and you can click on delete for whichever booking you wish to delete. <br>
 * Convert waitlist to a booking when a booking is cancelled: Create two customer profiles and create a booking with one and a waitlist with another. Cancel the booking and the waitlist will cet converted to a confirmed booking. <br>
 
-______________________________________________________________________________________________________ <br>
+_______________________________________________________________________<br>
 
 ### Testing <br>
 * The users model has been tested. The controller has not been tested.
