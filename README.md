@@ -7,12 +7,12 @@ _______________________________________________________________________<br>
 
 ### Login And Logout<br>
 
-Agent, Customer and Agent can login and logout of the application <br>
-Admin Credentails (within "")<br>
+Agent, Customer and Agent can log in and log out of the application. <br>
+Admin Credentails: <br>
 Username: "Admin" <br>
 Password: "TopSecret" <br>
 <br>
-Customer and Agent can login only after they signup from the link "Signup" provided on Welcome Page.<br>
+Customer and Agent can login only after they signup from the link "Signup" provided on Login Page.<br>
 Validations added on Signup page:
 * Username should be unique.
 * Email Id should be valid.
