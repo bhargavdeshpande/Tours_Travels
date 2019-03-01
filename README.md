@@ -71,6 +71,10 @@ _______________________________________________________________________<br>
 * Create a new tour: Log in as the Admin or an agent, and click on the New tour link. <br>
 * Upload photos for a tour: This functionality has not been implemented.<br>
 * Validations: <br>
+  * All fields are mandetory<br>
+  * Price, total seats and available seats should be only numeric
+  * Tour deadline date should be before of start date and end date
+  * Tour start date should be before of end date
 * Itinenary: Lod in as the Admin or an Agent, create a new tour, after entering tour details you are redirected to fill out an itinenary. You can add more than one if you wish to do so.<br>
 * Notification email when a seat is confirmed: This functionality is not implemented.<br>
 * Using LinkedIn/Google/Facebook accounts to log in: This functionality is not implemented.<br>
