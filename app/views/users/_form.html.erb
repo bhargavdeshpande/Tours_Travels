@@ -15,27 +15,27 @@
     <%= form.label :username %>
     <%= form.text_field :username, id: :user_username %>
   </div>
-
+  <br>
   <div class="field">
     <%= form.label :email %>
     <%= form.text_field :email, id: :user_email %>
   </div>
-
+  <br>
   <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password, id: :user_password %>
   </div>
-
+  <br>
   <div class="field">
     <%= form.label :password_confirmation %>
     <%= form.password_field :password_confirmation, id: :user_password_confirmation %>
   </div>
-
+  <br>
   <div class="field">
     <%= form.label :role %>
     <%= form.select :role, options_for_select({"Customer"=>1, "Agent"=>2}) %>
   </div>
-
+  <br>
   <div class="actions">
     <%= form.submit %>
   </div>

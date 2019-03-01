@@ -17,7 +17,7 @@
     <%= form.label :seatsToBook %>
     <%= form.number_field :seatsToBook, id: :booking_seatsToBook %>
   </div>
-
+  <br>
   <div class="field">
     <%= form.label :mode_of_booking %>
     <%= form.select :mode_of_booking, options_for_select(
@@ -28,8 +28,9 @@
         })
     %>
   </div>
-
+  <br>
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+<br>

@@ -4,40 +4,38 @@
   <%end %>
 </div>
 
-<h1>New Search</h1>
+<h1>Search here</h1>
 <div>
 
   <%=form_tag do %>
     <fieldset>
-      <legend>Please log in</legend>
       <div>
         <%= label_tag :price, 'Max Price' %>
         <%= text_field_tag :price, params[:price] %>
-        <br>
+        <br><br>
         <%= label_tag :tourname, 'Tourname' %>
         <%= text_field_tag :tourname, params[:tourname] %>
-        <br>
+        <br><br>
         <%= label_tag :state, 'State' %>
         <%= text_field_tag :state, params[:state] %>
-        <br>
+        <br><br>
         <%= label_tag :country, 'Country' %>
         <%= text_field_tag :country, params[:country] %>
-        <br>
+        <br><br>
         <%= label_tag :sdate, 'Start Date' %>
         <%= date_field_tag :sdate, params[:sdate] %>
-        <br>
+        <br><br>
         <%= label_tag :edate, 'End Date' %>
         <%= date_field_tag :edate, params[:edate] %>
-        <br>
+        <br><br>
         <%= label_tag :availableSeats, 'Available Seats' %>
         <%= text_field_tag :availableSeats, params[:availableSeats] %>
-
-
+        <br>
+        <br>
       </div>
       <div>
         <%= submit_tag "Search" %>
       </div>
-      <br>
 
     </fieldset>
   <% end %>
