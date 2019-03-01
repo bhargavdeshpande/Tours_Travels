@@ -3,7 +3,7 @@
 Heroku App Link: https://infinite-forest-63165.herokuapp.com/
 <br>
 This project is a tour management system application built in Ruby on Rails. 
-___________________________________________________________________________________________________________________________________<br>
+_________________________________________________________________________________________________________________________<br>
 
 ### Login And Logout<br>
 
