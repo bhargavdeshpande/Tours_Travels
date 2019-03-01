@@ -1,5 +1,5 @@
 # Wolf Tours And Travels
-**Description**<br>
+##Description<br>
 Heroku App Link: https://infinite-forest-63165.herokuapp.com/
 <br>
 This project is a tour management system application built in Ruby on Rails. The role-based access is implemented for this project based on the role: Agent, Customer or Admin. 
