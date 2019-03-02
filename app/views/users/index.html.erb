@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
-
+<h4>Note: Role Type: Customer(1), Agent(2), Admin(3)</h4>
 <table>
   <thead>
     <tr>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
-        <td><%= "Customer" if user.role==1 %><%= "Agent" if user.role==2 %><%= "Admin" if user.role==3 %></td>
+        <td><%= user.role%></td>
         <td><%= button_to 'Edit Profile', edit_user_path(user), method: :get %></td>
         <td><%= button_to 'Delete Profile', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
